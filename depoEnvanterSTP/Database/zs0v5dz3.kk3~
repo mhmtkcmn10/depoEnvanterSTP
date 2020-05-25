@@ -1,0 +1,79 @@
+﻿using depoEnvanterSTP.Tablolar;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace depoEnvanterSTP.Database
+{
+    class VakifSirketDB : Veritabani
+    {
+        public override void Ekle(IArayuz arayuz)
+        {
+            VakifSirket vakif = (VakifSirket)arayuz;
+            Baglan();
+            komut = new System.Data.SqlClient.SqlCommand("usp_SirketEkle", baglanti);
+            komut.CommandType = CommandType.StoredProcedure;
+
+            komut.Parameters.AddWithValue("@SirketAdi", vakif.SirketAdi);
+            komut.Parameters.AddWithValue("@SirketUnvani", vakif.SirketUnvani);
+            komut.Parameters.AddWithValue("@Adres", vakif.Adres);
+            komut.Parameters.AddWithValue("@Telefon", vakif.Telefon);
+            komut.Parameters.AddWithValue("@VergiNo", vakif.VergiNo);
+            komut.Parameters.AddWithValue("@Email", vakif.Email);
+            komut.Parameters.AddWithValue("@VergiDairesi", vakif.VergiDairesi);
+
+            komut.ExecuteNonQuery();
+            baglanti.Close();
+            baglanti.Dispose();
+        }
+
+        public override void Guncelle(IArayuz arayuz)
+        {
+            VakifSirket vakif = (VakifSirket)arayuz;
+            Baglan();
+            komut = new System.Data.SqlClient.SqlCommand("usp_SirketGuncelle", baglanti);
+            komut.CommandType = CommandType.StoredProcedure;
+            komut.Parameters.AddWithValue("@Id", sirket.Id);
+            komut.Parameters.AddWithValue("@SirketAdi", vakif.SirketAdi);
+            komut.Parameters.AddWithValue("@SirketUnvani", vakif.SirketUnvani);
+            komut.Parameters.AddWithValue("@Adres", vakif.Adres);
+            komut.Parameters.AddWithValue("@Telefon", vakif.Telefon);
+            komut.Parameters.AddWithValue("@VergiNo", vakif.VergiNo);
+            komut.Parameters.AddWithValue("@Email", vakif.Email);
+            komut.Parameters.AddWithValue("@VergiDairesi", vakif.VergiDairesi);
+            komut.ExecuteNonQuery();
+            baglanti.Close();
+            baglanti.Dispose();
+        }
+
+        public override DataTable Listele(IArayuz arayuz)
+        {
+            VakifSirket vakif = (VakifSirket)arayuz;
+            string sorgu = "SELECT * FROM tbl_Sirket ";
+            Baglan();
+            komut = new System.Data.SqlClient.SqlCommand(sorgu, baglanti);
+            komut.ExecuteNonQuery();
+            tablo = new DataTable();
+            adaptor = new System.Data.SqlClient.SqlDataAdapter(komut);
+            adaptor.Fill(tablo);
+            baglanti.Close();
+            baglanti.Dispose();
+            return tablo;
+        }
+
+        public override void Sil(IArayuz arayuz)
+        {
+            VakifSirket vakif = (VakifSirket)arayuz;
+            Baglan();
+            komut = new System.Data.SqlClient.SqlCommand("usp_SirketSil", baglanti);
+            komut.CommandType = CommandType.StoredProcedure;
+            komut.Parameters.AddWithValue("@Id", vakif.Id);
+            komut.ExecuteNonQuery();
+            baglanti.Close();
+            baglanti.Dispose();
+        }
+    }
+}
