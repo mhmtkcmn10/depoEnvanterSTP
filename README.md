@@ -8,4 +8,4 @@
 ![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=mhmtkcmn10&show_icons=true&theme=cobalt)
 
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=mhmtkcmn10&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=mhmtkcmn10&repo=github-readme-stats)](https://github.com/mhmtkcmn10/github-readme-stats)
